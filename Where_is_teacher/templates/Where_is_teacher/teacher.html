@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+  @import url('https://fonts.googleapis.com/css?family=Kosugi');
+
+  h4 {
+    font-family: 'Kosugi', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 30px;
+    margin-bottom: 20px;
+  }
+
+  form {
+    display: block;
+    font-size: 16px;
+    font-family: 'Kosugi', sans-serif;
+    display: block;
+    width: 70%;
+    margin-bottom: 10px; /* 下に余白を追加 */
+    padding: 20px; /* 余白 */
+    background-color: #f2f2f2; /* 背景色 */
+    border-radius: 10px; /* 角丸 */
+    box-shadow: 0 0 10px #ccc; /* 影 */
+  }
+
+  a {
+    font-family: 'Kosugi', sans-serif;
+    display: block;
+    padding: 10px;
+    margin-top: 30px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    }
+</style>
+
+<center>
+  {% for teacher in teacher_list %}
+    {% if user.get_username ==  teacher.contributor%}
+      <h4>更新メニュー</h4>
+      <form method="POST">
+        {% csrf_token %}
+        {{ teacher_form.as_p }}
+        <input type="submit" value="更新" class = "btn btn-primary">
+      </form>
+    {% endif %}
+  {% endfor %}
+
+  <a href="{% url 'Where_is_teacher:logout' %}" class="btn btn-secondary">教員一覧に戻る</a>
+</center>
+
+{% endblock %}
