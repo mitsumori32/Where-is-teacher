@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+  @import url('https://fonts.googleapis.com/css?family=Kosugi');
+
+  h5 {
+    font-family: 'Kosugi', sans-serif;
+    font-size: 17px;
+    font-weight: bold;
+    margin-bottom: 0;
+  }
+
+  p {
+    font-family: 'Kosugi', sans-serif;
+    font-size: 16px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+
+  .teacher-card {
+    background-color: #f2f2f2;
+    width: 50%;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px #ccc;
+    margin-top: 30px;
+    margin-bottom: 20px;
+  }
+
+  .teacher-name {
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  .back-button {
+    background-color: #0066FF;
+    color: white;
+    padding: 7px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+  }
+
+  .back-button:hover {
+    color: white;
+    background-color: #0066CC;
+  }
+
+  .teacher-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .back-button-container {
+    width: 100%;
+    text-align: center;
+  }
+</style>
+
+<div class="teacher-card-container">
+  {%for teacher in teacher_list%}
+    {%if teacher.id == teacher_id%}
+      <div class="teacher-card">
+        <h5 class="teacher-name">{{teacher.name}}</h5>
+        <h5>状態</h5>
+        <p>{{teacher.get_state_display}}</p>
+        <h5>コメント</h5>
+        <p>{{teacher.text}}</p>
+        <h5>更新時刻</h5>
+        <p>{{teacher.time}}</p>
+      </div>
+    {%endif%}
+  {%endfor%}
+</div>
+<div class="back-button-container">
+  <a href="{% url 'Where_is_teacher:index' %}" class="back-button">戻る</a>
+</div>
+
+{% endblock %}
